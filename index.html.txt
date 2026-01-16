@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>国风新韵 - 中国传统文化短视频</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- 统一的 Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#C41E3A', // 中国红
+            secondary: '#D4AF37', // 金色
+            dark: '#1A1A1A', // 墨黑
+            light: '#FFFFF0', // 象牙白
+            accent: '#8B4513', // 檀木色
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'pattern': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMjAgMEg0MHYyMEgwVjBIMjB6IiBmaWxsPSIjQzQxRTNBIiBmaWxsLW9wYWNpdHk9IjAuMSIvPjxwYXRoIGQ9Ik00MCAyMEg2MHYyMEg0MFYyMHoiIGZpbGw9IiNENEFGMzciIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9zdmc+')",
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .chinese-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+      .like-animation {
+        animation: like-pulse 0.5s ease-in-out;
+      }
+      @keyframes like-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+      }
+      .slide-up {
+        animation: slide-up 0.3s ease-out;
+      }
+      @keyframes slide-up {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .fade-in {
+        animation: fade-in 0.3s ease-out;
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      .gold-gradient {
+        background: linear-gradient(135deg, #D4AF37 0%, #F2D272 50%, #D4AF37 100%);
+      }
+      .red-gradient {
+        background: linear-gradient(135deg, #C41E3A 0%, #E63946 50%, #C41E3A 100%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-primary text-light overflow-hidden h-screen relative">
+  <!-- 背景图案 -->
+  <div class="absolute inset-0 chinese-pattern opacity-20 z-0"></div>
+  
+  <!-- 侧边栏菜单 -->
+  <div id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-primary z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="p-4 border-b border-secondary/30">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <img src="https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D" alt="用户头像" class="w-12 h-12 rounded-full border-2 border-secondary">
+          <div class="ml-3">
+            <h3 class="font-bold">未登录</h3>
+            <p class="text-xs text-light/70">点击登录</p>
+          </div>
+        </div>
+        <button class="text-xl">
+          <i class="fa fa-qrcode"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="p-4">
+      <ul class="space-y-4">
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-users text-xl w-6"></i>
+              <span class="ml-2">同频好友</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-paint-brush text-xl w-6"></i>
+              <span class="ml-2">创作者中心</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-file-text-o text-xl w-6"></i>
+              <span class="ml-2">我的草稿</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-money text-xl w-6"></i>
+              <span class="ml-2">钱包</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-headphones text-xl w-6"></i>
+              <span class="ml-2">客服</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-child text-xl w-6"></i>
+              <span class="ml-2">未成年模式</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-heart text-xl w-6"></i>
+              <span class="ml-2">我的收藏</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-history text-xl w-6"></i>
+              <span class="ml-2">观看历史</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-clock-o text-xl w-6"></i>
+              <span class="ml-2">稍后再看</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-moon-o text-xl w-6"></i>
+              <span class="ml-2">夜间模式</span>
+            </div>
+            <div class="relative inline-block w-10 align-middle select-none">
+              <input type="checkbox" id="night-mode" class="sr-only">
+              <label for="night-mode" class="block h-6 overflow-hidden rounded-full bg-secondary/30 cursor-pointer"></label>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-cog text-xl w-6"></i>
+              <span class="ml-2">设置</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-exchange text-xl w-6"></i>
+              <span class="ml-2">切换账号</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fa fa-question-circle text-xl w-6"></i>
+              <span class="ml-2">帮助与反馈</span>
+            </div>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 侧边栏遮罩 -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+  
+  <!-- 顶部导航栏 -->
+  <header class="relative z-10 bg-transparent px-4 py-3">
+    <div class="flex items-center">
+      <div class="relative">
+        <button id="menu-button" class="text-xl font-bold text-light">
+          <i class="fa fa-bars"></i>
+        </button>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs flex items-center justify-center">7</span>
+      </div>
+      <button id="back-button" class="text-xl font-bold text-light ml-4 hidden">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <nav class="ml-4 flex-1">
+        <ul class="flex space-x-6 overflow-x-auto scrollbar-hide">
+          <li>
+            <a href="#" class="text-light/80 hover:text-light px-1">精选</a>
+          </li>
+          <li>
+            <a href="#" class="text-light/80 hover:text-light px-1">同城</a>
+          </li>
+          <li>
+            <a href="#" class="text-light/80 hover:text-light px-1">关注</a>
+          </li>
+          <li>
+            <a href="#" class="text-light/80 hover:text-light px-1">直播</a>
+          </li>
+          <li>
+            <a href="#" class="text-light/80 hover:text-light px-1">商城</a>
+            <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </li>
+          <li>
+            <a href="#" class="text-light font-bold px-1">推荐</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="flex space-x-4">
+        <button class="text-light">
+          <i class="fa fa-search text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 主内容区 - 视频流 -->
+  <main class="relative h-[calc(100vh-13rem)] overflow-hidden">
+    <!-- 视频容器 -->
+    <div id="video-container" class="relative h-full w-full">
+      <!-- 当前视频 -->
+      <div class="video-slide absolute inset-0 bg-dark flex items-center justify-center">
+        <div class="relative w-full h-full">
+          <!-- 视频元素 -->
+          <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D');">
+            <!-- 播放按钮 -->
+            <button id="play-button" class="absolute inset-0 flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center">
+                <i class="fa fa-play text-2xl text-light"></i>
+              </div>
+            </button>
+          </div>
+          
+          <!-- 视频信息叠加层 -->
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+            <div class="flex items-center mb-2">
+              <img src="https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-secondary">
+              <div class="ml-3">
+                <h3 class="font-bold">京剧艺术传承者</h3>
+                <p class="text-sm text-light/80">2小时前</p>
+              </div>
+              <button class="ml-auto bg-secondary text-primary font-bold py-1 px-4 rounded-full text-sm">
+                关注
+              </button>
+            </div>
+            <p class="text-sm mb-2">京剧《贵妃醉酒》选段，传承经典文化，弘扬国粹艺术 #京剧 #传统文化 #非遗</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右侧互动按钮 -->
+    <div class="absolute right-2 bottom-24 flex flex-col items-center space-y-6 z-10">
+      <!-- 用户头像 -->
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary">
+          <img src="https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D" alt="用户头像" class="w-full h-full object-cover">
+        </div>
+        <div class="w-6 h-6 rounded-full bg-secondary text-primary flex items-center justify-center text-xs mt-1">
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
+      
+      <!-- 点赞按钮 -->
+      <div class="flex flex-col items-center">
+        <button id="like-button" class="w-12 h-12 rounded-full bg-black/30 flex items-center justify-center text-2xl">
+          <i class="fa fa-heart-o"></i>
+        </button>
+        <span class="text-xs mt-1">2.4w</span>
+      </div>
+      
+      <!-- 评论按钮 -->
+      <div class="flex flex-col items-center">
+        <button id="comment-button" class="w-12 h-12 rounded-full bg-black/30 flex items-center justify-center text-2xl">
+          <i class="fa fa-comment-o"></i>
+        </button>
+        <span class="text-xs mt-1">356</span>
+      </div>
+      
+      <!-- 收藏按钮 -->
+      <div class="flex flex-col items-center">
+        <button id="favorite-button" class="w-12 h-12 rounded-full bg-black/30 flex items-center justify-center text-2xl">
+          <i class="fa fa-star-o"></i>
+        </button>
+        <span class="text-xs mt-1">1.2w</span>
+      </div>
+      
+      <!-- 分享按钮 -->
+      <div class="flex flex-col items-center">
+        <button id="share-button" class="w-12 h-12 rounded-full bg-black/30 flex items-center justify-center text-2xl">
+          <i class="fa fa-share"></i>
+        </button>
+        <span class="text-xs mt-1">分享</span>
+      </div>
+    </div>
+  </main>
+  
+  <!-- 底部导航栏 -->
+  <footer class="relative z-10 bg-primary border-t border-secondary/30 py-2 px-6">
+    <ul class="flex justify-around">
+      <li>
+        <a href="#" class="flex flex-col items-center text-secondary">
+          <i class="fa fa-home text-xl"></i>
+          <span class="text-xs mt-1">首页</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="flex flex-col items-center text-light/70">
+          <i class="fa fa-comment text-xl"></i>
+          <span class="text-xs mt-1">话题</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center -mt-5">
+            <i class="fa fa-plus text-xl text-primary"></i>
+          </div>
+          <span class="text-xs mt-1 text-light/70">创作</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="flex flex-col items-center text-light/70">
+          <i class="fa fa-bell text-xl"></i>
+          <span class="text-xs mt-1">消息</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="my-profile-button" class="flex flex-col items-center text-light/70">
+          <i class="fa fa-user text-xl"></i>
+          <span class="text-xs mt-1">我的</span>
+        </a>
+      </li>
+    </ul>
+  </footer>
+  
+  <!-- 评论弹窗 -->
+  <div id="comment-modal" class="fixed inset-0 bg-black/70 z-50 hidden">
+    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-2xl max-h-[70vh] overflow-hidden">
+      <div class="p-4 border-b border-secondary/30">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-lg">评论 (356)</h3>
+          <button id="close-comments" class="text-2xl">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 评论列表 -->
+      <div class="overflow-y-auto max-h-[50vh] p-4 space-y-4">
+        <!-- 评论项 -->
+        <div class="flex">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/942278621798465611~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=LSkZUCYAk3CK%2ByS0v2%2BSiMfvcTo%3D" alt="用户头像" class="w-10 h-10 rounded-full">
+          <div class="ml-3 flex-1">
+            <div class="bg-dark/30 rounded-lg p-3">
+              <h4 class="font-bold text-sm">传统文化爱好者</h4>
+              <p class="text-sm mt-1">这段表演太精彩了！京剧艺术真是博大精深，希望能有更多年轻人了解和喜爱我们的传统文化。</p>
+            </div>
+            <div class="flex items-center mt-1 text-xs text-light/70">
+              <span>1小时前</span>
+              <button class="ml-4 flex items-center">
+                <i class="fa fa-heart-o mr-1"></i> 45
+              </button>
+              <button class="ml-4">回复</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/882637589235499040~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=Icn4ya73Xpir9did%2FtkCZwUmE0I%3D" alt="用户头像" class="w-10 h-10 rounded-full">
+          <div class="ml-3 flex-1">
+            <div class="bg-dark/30 rounded-lg p-3">
+              <h4 class="font-bold text-sm">国风音乐人</h4>
+              <p class="text-sm mt-1">唱腔优美，身段婀娜，真是一场视觉盛宴！传统文化需要这样的传承和创新。</p>
+            </div>
+            <div class="flex items-center mt-1 text-xs text-light/70">
+              <span>2小时前</span>
+              <button class="ml-4 flex items-center">
+                <i class="fa fa-heart-o mr-1"></i> 32
+              </button>
+              <button class="ml-4">回复</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex">
+          <img src="https://p11-doubao-search-sign.byteimg.com/ecom-shop-material/jpeg_m_0d0e9061796dd19f9cb43684d9002994_sx_3811475_www3072-3072~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=LhqhC2TyF1WrEllfwEnMmBms5yg%3D" alt="用户头像" class="w-10 h-10 rounded-full">
+          <div class="ml-3 flex-1">
+            <div class="bg-dark/30 rounded-lg p-3">
+              <h4 class="font-bold text-sm">艺术教育工作者</h4>
+              <p class="text-sm mt-1">作为一名艺术教师，我经常向学生们介绍京剧艺术。这样的视频对传统文化的普及非常有帮助，点赞！</p>
+            </div>
+            <div class="flex items-center mt-1 text-xs text-light/70">
+              <span>2小时前</span>
+              <button class="ml-4 flex items-center">
+                <i class="fa fa-heart-o mr-1"></i> 28
+              </button>
+              <button class="ml-4">回复</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 评论输入框 -->
+      <div class="p-4 border-t border-secondary/30">
+        <div class="flex items-center bg-dark/30 rounded-full px-4 py-2">
+          <input type="text" placeholder="说点什么..." class="bg-transparent border-none outline-none flex-1">
+          <button class="ml-2 text-secondary">
+            <i class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 分享弹窗 -->
+  <div id="share-modal" class="fixed inset-0 bg-black/70 z-50 hidden">
+    <div class="absolute bottom-0 left-0 right-0 bg-primary rounded-t-2xl p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold text-lg">分享到</h3>
+        <button id="close-share" class="text-2xl">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-4 gap-4">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
+            <i class="fa fa-wechat text-xl"></i>
+          </div>
+          <span class="text-xs mt-2">微信</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            <i class="fa fa-qq text-xl"></i>
+          </div>
+          <span class="text-xs mt-2">QQ</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white">
+            <i class="fa fa-weibo text-xl"></i>
+          </div>
+          <span class="text-xs mt-2">微博</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center text-white">
+            <i class="fa fa-link text-xl"></i>
+          </div>
+          <span class="text-xs mt-2">复制链接</span>
+        </div>
+      </div>
+      
+      <button class="mt-6 w-full py-3 bg-dark/30 rounded-full font-bold">
+        取消
+      </button>
+    </div>
+  </div>
+  
+  <!-- 用户二维码弹窗 -->
+  <div id="qrcode-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center">
+    <div class="bg-primary rounded-2xl p-6 w-4/5 max-w-sm text-center">
+      <h3 class="font-bold text-lg mb-4">我的二维码</h3>
+      <div class="bg-white p-4 inline-block rounded-lg">
+        <div class="w-48 h-48 bg-gray-100 flex items-center justify-center">
+          <i class="fa fa-qrcode text-6xl text-gray-400"></i>
+        </div>
+      </div>
+      <p class="mt-4 font-bold">年音新</p>
+      <p class="text-sm text-light/70">湫濡号：87654321</p>
+      <button id="close-qrcode" class="mt-6 w-full py-3 bg-secondary text-primary rounded-full font-bold">
+        关闭
+      </button>
+    </div>
+  </div>
+  
+  <!-- 话题页面 -->
+  <div id="topics-page" class="fixed inset-0 bg-primary z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <!-- 顶部导航 -->
+    <header class="bg-primary p-4 border-b border-secondary/30 flex items-center">
+      <button id="back-from-topics" class="text-xl">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <h2 class="text-xl font-bold ml-4">话题中心</h2>
+    </header>
+    
+    <!-- 话题内容 -->
+    <div class="p-4">
+      <!-- 搜索框 -->
+      <div class="relative mb-6">
+        <input type="text" placeholder="搜索话题..." class="w-full bg-dark/30 rounded-full py-3 px-4 pl-10 text-light focus:outline-none">
+        <i class="fa fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-light/70"></i>
+      </div>
+      
+      <!-- 热门话题 -->
+      <div class="mb-6">
+        <h3 class="text-lg font-bold mb-3">热门话题</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-dark/20 rounded-lg p-3 flex items-center">
+            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
+              <i class="fa fa-fire"></i>
+            </div>
+            <div class="ml-3">
+              <h4 class="font-bold">#传统文化复兴</h4>
+              <p class="text-xs text-light/70">2.4亿次播放</p>
+            </div>
+          </div>
+          <div class="bg-dark/20 rounded-lg p-3 flex items-center">
+            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400">
+              <i class="fa fa-paint-brush"></i>
+            </div>
+            <div class="ml-3">
+              <h4 class="font-bold">#国风美学</h4>
+              <p class="text-xs text-light/70">1.8亿次播放</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 话题分类 -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">话题分类</h3>
+        
+        <!-- 文化艺术 -->
+        <div class="mb-4">
+          <h4 class="font-bold text-secondary mb-2">文化艺术</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-book text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">文献</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-paint-brush text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">美术</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-music text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">音乐</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-pencil text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">诗歌</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-font text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">书法</p>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 生活文化 -->
+        <div class="mb-4">
+          <h4 class="font-bold text-secondary mb-2">生活文化</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-cutlery text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">饮食</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-cogs text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">工艺</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-flask text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">科普</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-institution text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">古董</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-home text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">中式建筑</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-gift text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">文玩</p>
+            </a>
+            <a href="#" class="bg-dark/20 rounded-lg p-3 text-center">
+              <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
+                <i class="fa fa-coffee text-secondary"></i>
+              </div>
+              <p class="text-sm mt-1">茶道</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 侧边栏菜单功能
+    const menuButton = document.getElementById('menu-button');
+    const myProfileButton = document.getElementById('my-profile-button');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    
+    function openSidebar() {
+      sidebar.classList.toggle('-translate-x-full');
+      sidebarOverlay.classList.toggle('hidden');
+    }
+    
+    menuButton.addEventListener('click', openSidebar);
+    // 返回按钮功能
+    const backButton = document.getElementById('back-button');
+    backButton.addEventListener('click', function() {
+      const profilePage = document.getElementById('profile-page');
+      profilePage.classList.add('translate-x-full');
+      backButton.classList.add('hidden');
+    });
+    
+    myProfileButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      const profilePage = document.getElementById('profile-page');
+      const backButton = document.getElementById('back-button');
+      profilePage.classList.remove('translate-x-full');
+      backButton.classList.remove('hidden');
+    });
+    
+    sidebarOverlay.addEventListener('click', function() {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.add('hidden');
+    });
+    
+    // 模拟视频数据
+    const videoData = [
+      {
+        id: 1,
+        url: "https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D",
+        cover: "https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D",
+        title: "京剧《贵妃醉酒》选段",
+        description: "京剧《贵妃醉酒》选段，传承经典文化，弘扬国粹艺术 #京剧 #传统文化 #非遗",
+        author: {
+          id: 101,
+          name: "京剧艺术传承者",
+          avatar: "https://p3-doubao-search-sign.byteimg.com/labis/8be25e4c3c37b249781284e8c2bae050~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=F4UfyyfqgBso2PKfECEPpJyKXdM%3D",
+          followers: 12000
+        },
+        stats: {
+          likes: 24000,
+          comments: 356,
+          shares: 1200,
+          favorites: 12000
+        }
+      },
+      {
+        id: 2,
+        url: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/942278621798465611~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=LSkZUCYAk3CK%2ByS0v2%2BSiMfvcTo%3D",
+        cover: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/942278621798465611~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=LSkZUCYAk3CK%2ByS0v2%2BSiMfvcTo%3D",
+        title: "中国传统山水画技法",
+        description: "跟着国家级非遗传承人学习传统山水画技法，感受中国传统绘画的魅力 #国画 #山水画 #传统艺术",
+        author: {
+          id: 102,
+          name: "山水画家李明",
+          avatar: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/942278621798465611~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105770&x-signature=LSkZUCYAk3CK%2ByS0v2%2BSiMfvcTo%3D",
+          followers: 8500
+        },
+        stats: {
+          likes: 18500,
+          comments: 243,
+          shares: 980,
+          favorites: 9500
+        }
+      },
+      {
+        id: 3,
+        url: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/87e89f4b99cc44e3a063249d230cc79c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105769&x-signature=a1fYp0J5BUUS4oUu1XNVJCX5%2B0s%3D",
+        cover: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/87e89f4b99cc44e3a063249d230cc79c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105769&x-signature=a1fYp0J5BUUS4oUu1XNVJCX5%2B0s%3D",
+        title: "中国书法艺术欣赏",
+        description: "走进中国书法艺术，感受汉字的魅力与韵味 #书法 #传统文化 #艺术欣赏",
+        author: {
+          id: 103,
+          name: "书法家王羲之后人",
+          avatar: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-xv4ileqgde/87e89f4b99cc44e3a063249d230cc79c~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1784105769&x-signature=a1fYp0J5BUUS4oUu1XNVJCX5%2B0s%3D",
+          followers: 15600
+        },
+        stats: {
+          likes: 32000,
+          comments: 456,
+          shares: 1800,
+          favorites: 16000
+        }
+      }
+    ];
+    
+    let currentVideoIndex = 0;
+    let isPlaying = false;
+    let isLiked = false;
+    let isFavorited = false;
+    
+    // DOM元素
+    const videoContainer = document.getElementById('video-container');
+    const playButton = document.getElementById('play-button');
+    const likeButton = document.getElementById('like-button');
+    const commentButton = document.getElementById('comment-button');
+    const favoriteButton = document.getElementById('favorite-button');
+    const shareButton = document.getElementById('share-button');
+    const commentModal = document.getElementById('comment-modal');
+    const closeComments = document.getElementById('close-comments');
+    const shareModal = document.getElementById('share-modal');
+    const closeShare = document.getElementById('close-share');
+    
+    // 播放/暂停视频
+    playButton.addEventListener('click', function() {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playButton.innerHTML = '<div class="w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center"><i class="fa fa-pause text-2xl text-light"></i></div>';
+        // 这里应该是实际视频的播放逻辑
+        console.log('播放视频');
+      } else {
+        playButton.innerHTML = '<div class="w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center"><i class="fa fa-play text-2xl text-light"></i></div>';
+        // 这里应该是实际视频的暂停逻辑
+        console.log('暂停视频');
+      }
+    });
+    
+    // 点赞功能
+    likeButton.addEventListener('click', function() {
+      isLiked = !isLiked;
+      if (isLiked) {
+        likeButton.innerHTML = '<i class="fa fa-heart text-red-500"></i>';
+        likeButton.classList.add('like-animation');
+        setTimeout(() => {
+          likeButton.classList.remove('like-animation');
+        }, 500);
+        // 更新点赞数
+        console.log('点赞成功');
+      } else {
+        likeButton.innerHTML = '<i class="fa fa-heart-o"></i>';
+        // 取消点赞
+        console.log('取消点赞');
+      }
+    });
+    
+    // 收藏功能
+    favoriteButton.addEventListener('click', function() {
+      isFavorited = !isFavorited;
+      if (isFavorited) {
+        favoriteButton.innerHTML = '<i class="fa fa-star text-yellow-400"></i>';
+        // 添加收藏
+        console.log('收藏成功');
+      } else {
+        favoriteButton.innerHTML = '<i class="fa fa-star-o"></i>';
+        // 取消收藏
+        console.log('取消收藏');
+      }
+    });
+    
+    // 评论功能
+    commentButton.addEventListener('click', function() {
+      commentModal.classList.remove('hidden');
+      commentModal.classList.add('fade-in');
+    });
+    
+    closeComments.addEventListener('click', function() {
+      commentModal.classList.add('hidden');
+    });
+    
+    // 分享功能
+    shareButton.addEventListener('click', function() {
+      shareModal.classList.remove('hidden');
+      shareModal.classList.add('fade-in');
+    });
+    
+    closeShare.addEventListener('click', function() {
+      shareModal.classList.add('hidden');
+    });
+    
+    // 模拟上下滑动切换视频
+    let startY = 0;
+    let endY = 0;
+    
+    videoContainer.addEventListener('touchstart', function(e) {
+      startY = e.touches[0].clientY;
+    });
+    
+    videoContainer.addEventListener('touchend', function(e) {
+      endY = e.changedTouches[0].clientY;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      const diff = startY - endY;
+      // 滑动距离大于50px才切换视频
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          // 向上滑动，切换到下一个视频
+          currentVideoIndex = (currentVideoIndex + 1) % videoData.length;
+          console.log('切换到下一个视频:', currentVideoIndex);
+          updateVideoUI();
+        } else {
+          // 向下滑动，切换到上一个视频
+          currentVideoIndex = (currentVideoIndex - 1 + videoData.length) % videoData.length;
+          console.log('切换到上一个视频:', currentVideoIndex);
+          updateVideoUI();
+        }
+      }
+    }
+    
+    // 更新视频UI
+    function updateVideoUI() {
+      const video = videoData[currentVideoIndex];
+      // 这里应该是实际更新视频内容的逻辑
+      console.log('更新视频:', video.title);
+      
+      // 重置状态
+      isPlaying = false;
+      isLiked = false;
+      isFavorited = false;
+      
+      playButton.innerHTML = '<div class="w-16 h-16 rounded-full bg-secondary/30 flex items-center justify-center"><i class="fa fa-play text-2xl text-light"></i></div>';
+      likeButton.innerHTML = '<i class="fa fa-heart-o"></i>';
+      favoriteButton.innerHTML = '<i class="fa fa-star-o"></i>';
+      
+      // 关闭所有弹窗
+      commentModal.classList.add('hidden');
+      shareModal.classList.add('hidden');
+    }
+    
+    // 点击模态框背景关闭模态框
+    commentModal.addEventListener('click', function(e) {
+      if (e.target === commentModal) {
+        commentModal.classList.add('hidden');
+      }
+    });
+    
+    shareModal.addEventListener('click', function(e) {
+      if (e.target === shareModal) {
+        shareModal.classList.add('hidden');
+      }
+    });
+    
+    // 二维码功能
+    const qrcodeButton = document.getElementById('qrcode-button');
+    const qrcodeModal = document.getElementById('qrcode-modal');
+    const closeQrcode = document.getElementById('close-qrcode');
+    
+    qrcodeButton.addEventListener('click', function() {
+      qrcodeModal.classList.remove('hidden');
+      qrcodeModal.classList.add('fade-in');
+    });
+    
+    closeQrcode.addEventListener('click', function() {
+      qrcodeModal.classList.add('hidden');
+    });
+    
+    qrcodeModal.addEventListener('click', function(e) {
+      if (e.target === qrcodeModal) {
+        qrcodeModal.classList.add('hidden');
+      }
+    });
+    
+    // 话题页面功能
+    const topicsButton = document.querySelector('footer a:nth-child(2)');
+    const topicsPage = document.getElementById('topics-page');
+    const backFromTopics = document.getElementById('back-from-topics');
+    
+    topicsButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      topicsPage.classList.remove('translate-x-full');
+      backButton.classList.remove('hidden');
+    });
+    
+    backFromTopics.addEventListener('click', function() {
+      topicsPage.classList.add('translate-x-full');
+      backButton.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
